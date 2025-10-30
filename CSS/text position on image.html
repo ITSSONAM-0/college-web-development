@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .container {
+                text-align: center;
+                position:relative;
+            }
+           
+            .container img {
+                height: 400px;
+                width: 100%;
+                opacity: 50%;
+            }
+            .topleft{  
+                position:absolute;
+                top:10px;
+                left:20px;
+            }
+            .topcenter{
+                position:absolute;
+                top:10px;
+                left:50%;
+                transform: translate(-50%,0%);
+            }
+            .topright{  
+                position:absolute;
+                top:10px;
+                right:20px;
+            }
+            .leftcenter{
+                position: absolute;
+                top:50%;
+                left:20px;
+                transform: translate(0,-50%);
+            }
+
+            .rightcenter{
+                position: absolute;
+                top:50%;
+                right:20px;
+                transform: translate(0,-50%);
+            }
+            .bottomleft{
+                position:absolute;
+                bottom:20px;
+                left:20px;
+            }
+            .bottomcenter{
+                position:absolute;
+                bottom:20px;
+                left:50%;
+                transform: translate(-50%,0%);
+            }
+            .bottomright{
+                position:absolute;
+                bottom:20px;
+                right:20px;
+            }
+            .center{
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+            }
+ </style> 
+    </head>
+    <body>
+        <div class="container">
+         <img src="Blue-Starry-Night.webp">
+         <div class="topleft">top left text</div>
+         <div class="topcenter">top center text</div>
+         <div class="topright">top right text</div>
+         <div class="leftcenter">left center text</div>
+         <div class="rightcenter">right center text</div>
+         <div class="bottomleft">bottom left text</div>
+         <div class="bottomcenter">bottom center text</div>
+         <div class="bottomright"> bottom rigt text</div>
+         <div class="center">center text</div>
+        </div>
+     </body>
+</html>

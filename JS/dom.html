@@ -1,0 +1,14 @@
+<input id="num1">
+<input id="num2">
+<h2 id="output"></h2>
+<button onclick="sumNumbers()">Result</button>
+
+<script>
+   function sumNumbers(){
+        x = document.getElementById('num1').value
+        y = document.getElementById('num2').value
+        result = parseInt(x) + parseInt(y)
+        document.getElementById('output').innerHTML = result
+   }
+   
+</script>

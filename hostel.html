@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FreshFold Laundry</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; scroll-behavior:smooth;}
+body { background:#f6f9ff; color:#333;}
+header{background:#007bff;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:15px 50px;position:sticky;top:0;z-index:10;}
+.logo{font-size:1.5rem;font-weight:600;}
+nav a{color:#fff;margin:0 15px;text-decoration:none;font-weight:500;transition:0.3s;}
+nav a:hover, nav a.active{text-decoration:underline;}
+.hero{height:90vh;background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:0 20px;}
+.hero-text{background:rgba(0,0,0,0.5);padding:40px;border-radius:15px;max-width:700px;}
+.hero-text h1{font-size:2.5rem;margin-bottom:15px;}
+.hero-text span{color:#ffce00;}
+.hero-text button{margin-top:20px;padding:12px 25px;background:#ffce00;border:none;border-radius:25px;cursor:pointer;transition:0.3s;font-weight:600;}
+.hero-text button:hover{background:#fff;color:#007bff;}
+section{padding:80px 50px;}
+.features{background:white;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px;}
+.feature{text-align:center;padding:30px 20px;background:#f6f9ff;border-radius:15px;box-shadow:0 0 10px rgba(0,0,0,0.1);transition:0.3s;opacity:0;transform:translateY(50px);}
+.feature img{width:80px;margin-bottom:10px;}
+.feature:hover{transform:translateY(-5px);}
+.pricing{text-align:center;background:#eaf2ff;}
+.pricing h2{color:#007bff;margin-bottom:40px;}
+.price-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
+.card{background:white;border-radius:15px;padding:30px 20px;width:250px;box-shadow:0 0 10px rgba(0,0,0,0.1);transition:0.3s;}
+.card:hover{transform:scale(1.05);}
+.card h3{margin-bottom:10px;color:#007bff;}
+.booking h2{text-align:center;color:#007bff;margin-bottom:30px;}
+.booking-form{max-width:600px;margin:auto;display:flex;flex-direction:column;gap:15px;}
+input, select{padding:12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;}
+button.submit-btn{background:#007bff;color:white;border:none;padding:12px;border-radius:25px;font-size:1rem;cursor:pointer;transition:0.3s;}
+button.submit-btn:hover{background:#0056b3;}
+.saved-bookings{margin-top:40px;text-align:center;}
+.saved-bookings h3{color:#007bff;margin-bottom:20px;}
+.booking-actions{margin-bottom:20px;}
+.booking-actions button{background:#28a745;color:white;border:none;padding:10px 20px;border-radius:25px;cursor:pointer;transition:0.3s;margin:5px;}
+.booking-actions button:hover{background:#218838;}
+.booking-list{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.book-card{background:white;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.1);padding:15px;width:260px;font-size:0.9rem;}
+footer{background:#007bff;color:white;text-align:center;padding:20px;margin-top:50px;}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">🧺 FreshFold</div>
+<nav>
+<a href="#home" class="active">Home</a>
+<a href="#services">Services</a>
+<a href="#pricing">Pricing</a>
+<a href="#booking">Booking</a>
+</nav>
+</header>
+
+<section id="home" class="hero">
+<div class="hero-text">
+<h1>We Make Your Laundry <span>Fresh & Easy</span></h1>
+<p>Doorstep pickup and delivery in just 24 hours!</p>
+<button onclick="document.querySelector('#booking').scrollIntoView({behavior:'smooth'})">Book a Pickup</button>
+</div>
+</section>
+
+<section id="services" class="features">
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/1615/1615089.png"><h3>Washing</h3><p>Gentle wash, spotless clean.</p></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/4370/4370878.png"><h3>Ironing</h3><p>Wrinkle-free perfection.</p></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/706/706195.png"><h3>Dry Cleaning</h3><p>Professional care for your clothes.</p></div>
+</section>
+
+<section id="pricing" class="pricing">
+<h2>Affordable Pricing</h2>
+<div class="price-cards">
+<div class="card"><h3>Basic Wash</h3><p>₹25 per item</p></div>
+<div class="card"><h3>Wash + Iron</h3><p>₹40 per item</p></div>
+<div class="card"><h3>Dry Cleaning</h3><p>₹80 per item</p></div>
+</div>
+</section>
+
+<section id="booking" class="booking">
+<h2>Book Your Laundry Pickup</h2>
+<form class="booking-form" onsubmit="return bookLaundry()">
+<input type="text" id="bname" placeholder="Full Name" required />
+<input type="tel" id="bphone" placeholder="Phone Number" required />
+<input type="date" id="bdate" required />
+<input type="time" id="btime" required />
+<select id="bservice" required>
+<option value="">Select Service</option>
+<option>Washing</option>
+<option>Wash + Iron</option>
+<option>Dry Cleaning</option>
+</select>
+<button class="submit-btn" type="submit">Confirm Booking</button>
+</form>
+
+<div class="saved-bookings">
+<h3>Your Saved Bookings</h3>
+<div class="booking-actions">
+<button onclick="exportBookings()">🧾 Export Bookings (.json)</button>
+<input type="file" id="importFile" accept=".json" onchange="importBookings(event)" style="padding:10px;border-radius:25px;border:1px solid #ccc;cursor:pointer;">
+</div>
+<div class="booking-list" id="bookingList"></div>
+</div>
+</section>
+
+<footer>
+<p>© 2025 FreshFold Laundry | All Rights Reserved</p>
+</footer>
+
+<script>
+// Animate features
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.feature').forEach(el => {
+    const pos = el.getBoundingClientRect().top;
+    if(pos < window.innerHeight - 100) {
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', showBookings);
+
+function bookLaundry() {
+  const name = document.getElementById('bname').value;
+  const phone = document.getElementById('bphone').value;
+  const date = document.getElementById('bdate').value;
+  const time = document.getElementById('btime').value;
+  const service = document.getElementById('bservice').value;
+
+  const booking = { name, phone, date, time, service };
+  const bookings = JSON.parse(localStorage.getItem('laundryBookings')) || [];
+  bookings.push(booking);
+  localStorage.setItem('laundryBookings', JSON.stringify(bookings));
+
+  alert(`Thank you, ${name}! Your ${service} service has been booked successfully 🧺`);
+  document.querySelector('.booking-form').reset();
+  showBookings();
+  return false;
+}
+
+function showBookings() {
+  const list = document.getElementById('bookingList');
+  const bookings = JSON.parse(localStorage.getItem('laundryBookings')) || [];
+  list.innerHTML = "";
+  if(bookings.length===0){ list.innerHTML="<p>No bookings yet.</p>"; return; }
+  bookings.forEach((b,i)=>{
+    const card=document.createElement('div');
+    card.className="book-card";
+    card.innerHTML=`
+      <p><strong>${b.name}</strong></p>
+      <p>${b.service}</p>
+      <p>${b.date} at ${b.time}</p>
+      <p>📞 ${b.phone}</p>
+      <button onclick="deleteBooking(${i})" style="margin-top:8px;padding:5px 10px;border:none;background:#ff4d4d;color:white;border-radius:5px;cursor:pointer;">Delete</button>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function deleteBooking(index) {
+  const bookings=JSON.parse(localStorage.getItem('laundryBookings'))||[];
+  bookings.splice(index,1);
+  localStorage.setItem('laundryBookings', JSON.stringify(bookings));
+  showBookings();
+}
+
+// Export bookings to JSON
+function exportBookings(){
+  const bookings = JSON.parse(localStorage.getItem('laundryBookings')) || [];
+  if(bookings.length===0){ alert("No bookings to export!"); return; }
+  const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(bookings,null,2));
+  const downloadAnchor=document.createElement('a');
+  downloadAnchor.setAttribute("href",dataStr);
+  downloadAnchor.setAttribute("download","my_laundry_bookings.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
+// Import bookings from JSON file
+function importBookings(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const imported = JSON.parse(e.target.result);
+      if(!Array.isArray(imported)){ alert("Invalid file format!"); return; }
+      const existing = JSON.parse(localStorage.getItem('laundryBookings'))||[];
+      const merged = existing.concat(imported);
+      localStorage.setItem('laundryBookings', JSON.stringify(merged));
+      showBookings();
+      alert(`Imported ${imported.length} bookings successfully!`);
+    }catch(err){
+      alert("Error parsing file!");
+    }
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>

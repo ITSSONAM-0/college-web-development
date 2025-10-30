@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div>
+        <h1>Enter Your Text Here</h1>
+        <textarea type="text" id="myBox" rows="10" cols="100" value=""></textarea>
+        <div style="padding-top: 20px;">
+            <button id="upper">Convert UpperCase</button>
+            <button id="lower">Convert LowerCase</button>
+            <button id="remove">Remove WhiteSpaces</button>
+            <button id="copy">Copy to Clipboard</button>
+            <button id="proper">Convert ProperCase</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('upper').onclick = function() {
+            var textInput = document.getElementById('myBox').value.toUpperCase();
+            document.getElementById('myBox').value = textInput;
+        }
+        document.getElementById('lower').onclick = function() {
+            var textInput = document.getElementById('myBox').value.toLowerCase();
+            document.getElementById('myBox').value = textInput;
+        }
+        document.getElementById('remove').onclick = function() {
+            var textInput = document.getElementById('myBox').value.split(/[ ]+/).join(" ");
+            document.getElementById('myBox').value = textInput;
+        }
+        document.getElementById('copy').onclick = function() {
+            var textInput = document.getElementById('myBox');
+			textInput.select();
+            textInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textInput.value);
+        }
+		
+		document.getElementById('proper').onclick = function(){ 
+			var words = document.getElementById('myBox').value.split(' ');
+			var CapitalizedWords = [];  
+			words.forEach(element => {  
+			CapitalizedWords.push(element[0].toUpperCase() + element.slice(1, element.length));  
+		});
+		document.getElementById('myBox').value = CapitalizedWords.join(' ');   
+		}
+		// ANOTHER METHOD
+		/*function copyText(){
+		var text = document.getElementById("myBox");
+        text.select();
+        text.setSelectionRange(0, 9999);
+        navigator.clipboard.writeText(text.value);
+		}*/
+    </script>
+</body>
+
+</html>

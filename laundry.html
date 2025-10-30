@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreshFold Laundry — Single Page</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#0b79ff;
+      --dark:#0f1724;
+      --muted:#6b7280;
+      --accent:#ffce00;
+      --bg:#f6f9ff;
+      --card:#ffffff;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* Header / Nav */
+    header{
+      position:sticky;
+      top:0;
+      z-index:60;
+      backdrop-filter: blur(6px);
+      background:linear-gradient(to right, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+      border-bottom:1px solid rgba(11,121,255,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 20px;
+    }
+    .logo{
+      display:flex;gap:10px;align-items:center;font-weight:700;color:var(--blue);
+      font-size:1.15rem;
+    }
+    .logo .mark{
+      width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--blue),#0ea5ff);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+      box-shadow:0 3px 10px rgba(11,121,255,0.15);
+    }
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{
+      text-decoration:none;color:var(--dark);padding:8px 12px;border-radius:10px;font-weight:600;font-size:0.95rem;
+    }
+    nav a.active{background:rgba(11,121,255,0.1);color:var(--blue)}
+    .cta{
+      background:var(--accent);border:none;padding:8px 14px;border-radius:999px;font-weight:700;cursor:pointer;
+      box-shadow:0 6px 20px rgba(255,206,0,0.12);
+    }
+
+    /* Container */
+    .container{max-width:1100px;margin:28px auto;padding:0 20px}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+      margin-top:8px;
+    }
+    .hero-card{
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(12,40,80,0.06);
+    }
+    .hero h1{font-size:1.9rem;margin-bottom:10px;color:var(--dark)}
+    .hero p{color:var(--muted);margin-bottom:18px}
+    .hero .book-row{display:flex;gap:10px;flex-wrap:wrap}
+    .hero .book-row input, .hero .book-row select{
+      padding:10px 12px;border-radius:10px;border:1px solid #e6eefc;background:white;min-width:140px;
+    }
+    .hero .book-row button{background:var(--blue);color:white;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+
+    /* Features grid */
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:22px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(11,121,255,0.04);display:flex;gap:12px;align-items:center}
+    .icon{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#e9f5ff,#eefbff);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);
+    }
+    .card h4{margin:0;margin-bottom:6px}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* Sections */
+    section{margin-top:28px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .section-head h2{margin:0;font-size:1.15rem}
+    .grid{display:grid;gap:14px}
+
+    /* Pricing */
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+    .price-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 10px 22px rgba(12,40,80,0.03);text-align:center}
+    .price{font-weight:800;font-size:1.6rem;color:var(--blue);margin:12px 0}
+    .small{font-size:0.9rem;color:var(--muted)}
+
+    /* Contact / Form */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    form{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 22px rgba(12,40,80,0.03)}
+    form .row{display:flex;gap:10px;margin-bottom:10px}
+    form input, form textarea, form select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc}
+    .submit{background:var(--blue);color:white;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+
+    /* Footer */
+    footer{margin-top:38px;padding:18px 0;text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* Small screens */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr; padding-bottom:12px}
+      .contact-grid{grid-template-columns:1fr}
+      header{padding:10px}
+      .logo{font-size:1rem}
+    }
+
+    /* little animations */
+    .fade-up{opacity:0;transform:translateY(10px);transition:all .6s ease}
+    .fade-up.show{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header>
+    <div class="logo" aria-label="FreshFold Laundry">
+      <div class="mark">FF</div>
+      <div>
+        <div style="font-weight:700">FreshFold</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">Doorstep Laundry</div>
+      </div>
+    </div>
+
+    <nav aria-label="Main Navigation">
+      <a href="#" data-link="home" class="active">Home</a>
+      <a href="#" data-link="services">Services</a>
+      <a href="#" data-link="pricing">Pricing</a>
+      <a href="#" data-link="contact">Contact</a>
+    </nav>
+
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="cta" onclick="scrollToSection('contact')">Book Pickup</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container" id="app">
+    <!-- HOME / HERO -->
+    <section id="home" class="page-section">
+      <div class="hero">
+        <div class="hero-card fade-up">
+          <h1>We Make Your Laundry <span style="color:var(--blue)">Fresh & Easy</span></h1>
+          <p class="muted">Doorstep pickup & delivery within 24–48 hours. Safe cleaning for all fabrics and quick delivery.</p>
+
+          <div style="display:flex;gap:14px;align-items:center;margin-top:14px;flex-wrap:wrap">
+            <div style="min-width:220px">
+              <label class="muted" style="font-size:0.85rem">Pickup Date</label>
+              <input type="date" id="pickupDate" value="">
+            </div>
+
+            <div style="min-width:160px">
+              <label class="muted" style="font-size:0.85rem">Service</label>
+              <select id="pickupService">
+                <option value="wash">Wash & Fold</option>
+                <option value="iron">Ironing</option>
+                <option value="dry">Dry Cleaning</option>
+                <option value="both">Full Service</option>
+              </select>
+            </div>
+
+            <div style="flex:1;display:flex;gap:8px;align-items:center">
+              <button id="quickBook" class="cta">Book Pickup</button>
+              <button onclick="showSection('services')" style="background:transparent;border:none;color:var(--blue);font-weight:700;cursor:pointer">View Services</button>
+            </div>
+          </div>
+
+          <div style="margin-top:16px" class="muted">Need help? Call or WhatsApp: <strong style="color:var(--dark)">+91 98765 43210</strong></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card fade-up" style="align-items:flex-start">
+            <div class="icon">🧺</div>
+            <div>
+              <h4>Pickup & Delivery</h4>
+              <div class="muted">Doorstep pickup and delivery at your chosen slot.</div>
+            </div>
+          </div>
+
+          <div class="card fade-up" style="align-items:flex-start">
+            <div class="icon">⏱️</div>
+            <div>
+              <h4>Fast Turnaround</h4>
+              <div class="muted">Most orders ready within 24–48 hours.</div>
+            </div>
+          </div>
+
+          <div class="card fade-up" style="align-items:flex-start">
+            <div class="icon">🌿</div>
+            <div>
+              <h4>Eco Friendly</h4>
+              <div class="muted">Careful, low-waste cleaning options available.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURES -->
+      <div class="features" style="margin-top:18px">
+        <div class="card fade-up">
+          <div class="icon">🧼</div>
+          <div>
+            <h4>Gentle Wash</h4>
+            <div class="muted">Fabric-safe detergents and temperature control.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up">
+          <div class="icon">🧯</div>
+          <div>
+            <h4>Stain Removal</h4>
+            <div class="muted">Professional stain treatment for tough marks.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up">
+          <div class="icon">👔</div>
+          <div>
+            <h4>Expert Ironing</h4>
+            <div class="muted">Crisp finish for shirts, suits and delicate fabrics.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up">
+          <div class="icon">📦</div>
+          <div>
+            <h4>Secure Packaging</h4>
+            <div class="muted">Neat, labelled packaging for every order.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="page-section" style="display:none">
+      <div class="section-head">
+        <h2>Our Services</h2>
+        <div class="muted">Choose what fits you best</div>
+      </div>
+
+      <div class="grid">
+        <div class="card fade-up" style="align-items:flex-start">
+          <div class="icon">🧺</div>
+          <div>
+            <h4>Wash & Fold</h4>
+            <div class="muted">Per kg pricing, clothes sorted and folded neatly.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up" style="align-items:flex-start">
+          <div class="icon">🔵</div>
+          <div>
+            <h4>Dry Cleaning</h4>
+            <div class="muted">For suits, silk, delicate items requiring solvent cleaning.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up" style="align-items:flex-start">
+          <div class="icon">🧷</div>
+          <div>
+            <h4>Special Care</h4>
+            <div class="muted">Delicates, woollens, and hand-wash items handled separately.</div>
+          </div>
+        </div>
+
+        <div class="card fade-up" style="align-items:flex-start">
+          <div class="icon">🔁</div>
+          <div>
+            <h4>Subscription Plans</h4>
+            <div class="muted">Weekly / bi-weekly pickups with discount rates.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="page-section" style="display:none">
+      <div class="section-head">
+        <h2>Pricing</h2>
+        <div class="muted">Transparent, no hidden fees</div>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card fade-up">
+          <div style="font-weight:700">Basic Wash</div>
+          <div class="price">₹40 / kg</div>
+          <div class="small">Standard wash & fold</div>
+        </div>
+
+        <div class="price-card fade-up">
+          <div style="font-weight:700">Ironing</div>
+          <div class="price">₹12 / piece</div>
+          <div class="small">Shirts/Trousers / Blouse</div>
+        </div>
+
+        <div class="price-card fade-up">
+          <div style="font-weight:700">Dry Clean</div>
+          <div class="price">₹120 / piece</div>
+          <div class="small">Jackets, Suits, Dresses</div>
+        </div>
+
+        <div class="price-card fade-up">
+          <div style="font-weight:700">Subscription</div>
+          <div class="price">From ₹499 / month</div>
+          <div class="small">Weekly pickup, discounted per-kg rate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page-section" style="display:none">
+      <div class="section-head">
+        <h2>Contact & Bookings</h2>
+        <div class="muted">Fill the form — we will confirm via WhatsApp or call</div>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <form id="bookingForm" onsubmit="return submitForm(event)">
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <div style="flex:1;min-width:160px">
+                <label class="muted">Full Name</label>
+                <input type="text" id="name" placeholder="Your name" required>
+              </div>
+              <div style="flex:1;min-width:160px">
+                <label class="muted">Phone</label>
+                <input type="tel" id="phone" placeholder="+91 9XXXXXXXXX" required pattern="[0-9]{10}">
+              </div>
+            </div>
+
+            <div class="row">
+              <input id="address" placeholder="Pickup address (street, area, city)" required>
+            </div>
+
+            <div class="row">
+              <select id="serviceSelect" required>
+                <option value="">Select service</option>
+                <option value="wash">Wash & Fold</option>
+                <option value="dry">Dry Clean</option>
+                <option value="iron">Ironing</option>
+                <option value="both">Full Service</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <input type="date" id="date" required>
+              <select id="timeslot" required>
+                <option value="">Choose time slot</option>
+                <option>09:00 - 11:00</option>
+                <option>11:00 - 13:00</option>
+                <option>14:00 - 16:00</option>
+                <option>16:00 - 18:00</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <textarea id="notes" rows="3" placeholder="Any special instructions (stains, delicate fabrics)"></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+              <div class="muted">We will call/WhatsApp to confirm.</div>
+              <button class="submit" type="submit">Send Booking</button>
+            </div>
+          </form>
+
+          <div style="margin-top:14px" class="card fade-up">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div class="icon">📞</div>
+              <div>
+                <div style="font-weight:700">Need immediate help?</div>
+                <div class="muted">Call / WhatsApp: +91 98765 43210</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card fade-up">
+            <h4>Pickup Instructions</h4>
+            <ul class="muted" style="margin-top:8px">
+              <li>Please keep garments in a bag & label if multiple orders.</li>
+              <li>Keep phone reachable at pickup time.</li>
+              <li>We follow contactless pickup on request.</li>
+            </ul>
+          </div>
+
+          <div class="card fade-up" style="margin-top:12px">
+            <h4>Why FreshFold?</h4>
+            <div class="muted" style="margin-top:8px">
+              Professional care, transparent pricing, and careful handling of delicate items. Eco-friendly options available.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> FreshFold Laundry • Designed with ❤️ • Policy • Terms
+    </footer>
+  </main>
+
+  <script>
+    // Initial setup
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple SPA: show/hide sections
+    const links = document.querySelectorAll('nav a[data-link]');
+    function showSection(id){
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(s => s.style.display = (s.id === id ? '' : 'none'));
+      links.forEach(a => a.classList.toggle('active', a.dataset.link === id));
+      // scroll to top of container
+      document.getElementById('app').scrollIntoView({behavior:'smooth'});
+      // reveal animations
+      reveal();
+    }
+
+    links.forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection(a.dataset.link);
+        // update URL hash
+        history.pushState(null, '', '#' + a.dataset.link);
+      });
+    });
+
+    // If URL has hash, open that section
+    (function initFromHash(){
+      const hash = location.hash.replace('#','');
+      if(hash && document.getElementById(hash)) showSection(hash);
+      else showSection('home');
+    })();
+
+    // Quick book button (from hero)
+    document.getElementById('quickBook').addEventListener('click', () => {
+      // prefill form date/service if available
+      const d = document.getElementById('pickupDate').value;
+      const s = document.getElementById('pickupService').value;
+      showSection('contact');
+      if(d) document.getElementById('date').value = d;
+      if(s) document.getElementById('serviceSelect').value = s;
+      // focus on name
+      setTimeout(()=> document.getElementById('name').focus(), 350);
+    });
+
+    // Reveal animation for elements with .fade-up
+    function reveal(){
+      document.querySelectorAll('.fade-up').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 40){
+          el.classList.add('show');
+        } else {
+          el.classList.remove('show');
+        }
+      });
+    }
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('resize', reveal);
+    reveal();
+
+    // Booking form simple submit (no backend) -> shows confirmation and creates mailto as fallback
+    function submitForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const service = document.getElementById('serviceSelect').value;
+      const date = document.getElementById('date').value;
+      const timeslot = document.getElementById('timeslot').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      // basic validation
+      if(!name || !phone || !address || !service || !date || !timeslot){
+        alert('Please fill all required fields.');
+        return false;
+      }
+
+      const summary = `Booking request from ${name}\nPhone: ${phone}\nAddress: ${address}\nService: ${service}\nDate: ${date} ${timeslot}\nNotes: ${notes}`;
+      // Copy to clipboard for user convenience
+      navigator.clipboard?.writeText(summary).catch(()=>{});
+      // Show nice confirmation
+      alert('Thank you! Your booking request has been recorded. We will call/WhatsApp you to confirm.\n\n(Booking details copied to clipboard.)');
+
+      // Optional: fallback mailto (user can send an email to business)
+      const subject = encodeURIComponent('Laundry Booking Request - ' + name);
+      const body = encodeURIComponent(summary);
+      // open mail client (comment out if not needed)
+      // window.location.href = `mailto:booking@freshfold.example?subject=${subject}&body=${body}`;
+
+      // reset form (or keep to let user edit)
+      document.getElementById('bookingForm').reset();
+      return false;
+    }
+
+    // Small enhancement: set min date to today for date inputs
+    (function setMinDates(){
+      const today = new Date().toISOString().split('T')[0];
+      document.querySelectorAll('input[type="date"]').forEach(d=>{
+        d.setAttribute('min', today);
+      });
+    })();
+
+    // Accessibility: allow keyboard navigation to nav links to switch sections
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === '1') showSection('home');
+      if(e.key === '2') showSection('services');
+      if(e.key === '3') showSection('pricing');
+      if(e.key === '4') showSection('contact');
+    });
+  </script>
+</body>
+</html>

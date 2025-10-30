@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Responsive Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .box {
+            width: 30%;
+            margin: 10px;
+            padding: 20px;
+            background-color: lightblue;
+            display: inline-block;
+        }
+
+        /* Mobile Screens (max 600px) */
+        @media (max-width: 600px) {
+            .box {
+                width: 100%;
+                /* Full width */
+                background-color: lightcoral;
+                /* Color change for demo */
+            }
+        }
+
+        /* Tablet Screens (max 768px) */
+        @media (max-width: 768px) {
+            .box {
+                width: 45%;
+                /* Two per row */
+                background-color: lightgreen;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Responsive Basics – Media Queries</h1>
+    <p>Responsive design means webpages adjust automatically to look good on all devices: desktop, tablet, and mobile.
+    </p>
+    <p>Media Queries are CSS rules that apply styles only if certain conditions (like screen size) are true.</p>
+    <pre>
+        @media (condition) {
+    /* CSS rules here */}
+    </pre>
+
+    <h2>Common Breakpoints (industry standard)</h2>
+    
+    <ul>
+        <li>max-width: 600px → Mobile</li>
+        <li>max-width: 768px → Tablet</li>
+        <li>max-width: 1024px → Small laptops</li>
+        <li>min-width: 1200px → Large screens</li>
+    </ul>
+
+    <h2>Responsive Boxes</h2>
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+
+</body>
+
+</html>

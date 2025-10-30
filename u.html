@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Registration Form</title>
+  <style>
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      background: #f7fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      width: 360px;
+    }
+    h2 { margin-top: 0; margin-bottom: 12px; font-size: 20px; }
+    label { display: block; margin-top: 10px; font-size: 14px; }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .gender, .nationality { margin-top: 6px; }
+    .small { font-size: 13px; color: #555; margin-top: 6px; }
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      background: #2563eb;
+      color: white;
+    }
+    .note { font-size: 12px; color: #666; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <form class="card" id="regForm">
+    <h2>Registration Form</h2>
+
+    <label for="name">Name *</label>
+    <input type="text" id="name" name="name" placeholder="Apna naam likhen" required />
+
+    <label for="age">Age *</label>
+    <select id="age" name="age" required>
+      <option value="">--Select age--</option>
+      <!-- options will be populated by JS -->
+    </select>
+
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" placeholder="example@domain.com" required />
+
+    <label for="password">Password *</label>
+    <input type="password" id="password" name="password" placeholder="Password dalen" minlength="6" required />
+
+    <label>Gender *</label>
+    <div class="gender">
+      <label><input type="radio" name="gender" value="Male" required /> Male</label>
+      <label style="margin-left:12px;"><input type="radio" name="gender" value="Female" /> Female</label>
+    </div>
+
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" placeholder="Shehar ka naam" />
+
+    <label>Nationality (select all that apply)</label>
+    <div class="nationality">
+      <label><input type="checkbox" name="nationality" value="Indian" /> Indian</label><br/>
+      <label><input type="checkbox" name="nationality" value="Nepali" /> Nepali</label><br/>
+      <label><input type="checkbox" name="nationality" value="Other" /> Other</label>
+      <input type="text" id="nationalityOther" name="nationalityOther" placeholder="Agar 'Other' to specify karen" style="margin-top:6px; width:100%; padding:8px; border-radius:6px; border:1px solid #d1d5db;" />
+    </div>
+
+    <div class="note">* Required fields</div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Populate age select 1..100
+    const ageSelect = document.getElementById('age');
+    for (let i = 1; i <= 100; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i;
+      ageSelect.appendChild(opt);
+    }
+
+    // Simple submit handler: prevent default and show collected data in console
+    document.getElementById('regForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value.trim(),
+        age: form.age.value,
+        email: form.email.value.trim(),
+        password: form.password.value, // be careful: don't log passwords in real apps
+        gender: form.gender.value,
+        city: form.city.value.trim(),
+        nationality: Array.from(form.querySelectorAll('input[name="nationality"]:checked')).map(n => n.value),
+        nationalityOther: form.nationalityOther.value.trim()
+      };
+
+      // If 'Other' checked and nationalityOther filled, include it
+      if (data.nationality.includes('Other') && data.nationalityOther) {
+        data.nationality.push(data.nationalityOther);
+      }
+
+      // For demo: log to console and show success message
+      console.log('Form submitted:', data);
+      alert('Form submitted — check console for collected data.');
+      form.reset();
+      ageSelect.selectedIndex = 0;
+    });
+  </script>
+</body>
+</html>

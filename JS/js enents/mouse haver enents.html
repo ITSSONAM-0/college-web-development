@@ -1,0 +1,13 @@
+<p> "this" refers to the object that is currently executing the code. Its value depends on how and where the function is
+    called.</p>
+<p onmouseover="highlight(this)" onmouseout="removeHighlight(this)">
+    Hover over me!
+</p>
+<script>
+    function highlight(el) {
+        el.style.backgroundColor = "yellow";
+    }
+    function removeHighlight(el) {
+        el.style.backgroundColor = "blue";
+    }
+</script>
